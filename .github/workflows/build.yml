@@ -16,6 +16,13 @@ jobs:
         with:
           flutter-version: '3.19.0'
           channel: 'stable'
+      
+      - name: Create missing platform folders
+        run: |
+          flutter create --platforms=android .
+          rm -rf lib
+          git checkout -- lib
+          
       - run: flutter pub get
       - run: flutter build apk --release
       - uses: actions/upload-artifact@v4
